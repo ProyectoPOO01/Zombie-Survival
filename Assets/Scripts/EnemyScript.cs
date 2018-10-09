@@ -13,22 +13,18 @@ public class EnemyScript : MonoBehaviour
     public NavMeshAgent Agent
     {
         get { return agent; }
-        set { value = agent; }
     }
     public Transform Target
     {
         get { return target; }
-        set { value = target; }
     }
     public Jugador Jugad
     {
         get { return jugador; }
-        set { value = jugador; }
     }
     public Animator Anim
     {
         get { return anim; }
-        set { value = anim; }
     }
 
     public GameObject player;
@@ -65,7 +61,7 @@ public class EnemyScript : MonoBehaviour
             anim.SetBool("Walk", false);
             agent.isStopped = true;
         }
-        if(jugador.CurrentHealth ==0)
+        if(jugador.CurrentHealth == 0)
         {
             anim.SetBool("PlayerAlive", false);
             anim.SetBool("Walk", false);

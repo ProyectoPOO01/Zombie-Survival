@@ -61,7 +61,7 @@ public class Jugador : MonoBehaviour {
 	
 	void Update ()
     {
-
+        Debug.Log(CurrentHealth);
         currentHealth = startingHealth;
         Desplazar();
         CambiarPose();
