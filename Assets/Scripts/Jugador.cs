@@ -24,6 +24,9 @@ public class Jugador : MonoBehaviour {
     Animator animator;
     Transform cameraT;
 
+    Camera cam;
+    public GameObject camara;
+
     public bool IsWalking
     {
         get { return isWalking; }
@@ -36,6 +39,10 @@ public class Jugador : MonoBehaviour {
     {
         get { return shooting; }
     }
+    public bool Aiming
+    {
+        get { return aiming; }
+    }
 
     public int CurrentHealth
     {
@@ -44,6 +51,8 @@ public class Jugador : MonoBehaviour {
 
     void Start()
     {
+        cam = camara.GetComponent<Camera>(); 
+
         startingHealth = 100;
         currentHealth = startingHealth;
 
@@ -61,7 +70,6 @@ public class Jugador : MonoBehaviour {
 	
 	void Update ()
     {
-        Debug.Log(CurrentHealth);
         currentHealth = startingHealth;
         Desplazar();
         CambiarPose();
@@ -73,7 +81,7 @@ public class Jugador : MonoBehaviour {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        if (inputDir != Vector2.zero)
+        if ((inputDir != Vector2.zero) || aiming)
         {
             float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
