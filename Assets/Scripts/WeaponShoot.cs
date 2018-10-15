@@ -24,8 +24,9 @@ public class WeaponShoot : MonoBehaviour {
         shootAudio = GetComponent<AudioSource>();
     }
 	
-	void Update () 
+	void Update ()
     {
+
         Disparar();
 	}
 
@@ -42,6 +43,7 @@ public class WeaponShoot : MonoBehaviour {
             StartCoroutine(ShootDelay());
         }
     }
+
     IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shootDelay);

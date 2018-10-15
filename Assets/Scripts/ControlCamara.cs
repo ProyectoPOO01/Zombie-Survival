@@ -60,8 +60,8 @@ public class ControlCamara : MonoBehaviour {
 
         if (jugador.Aiming)
         {
-            dstFromTarget = 1;
-            transform.position = target02.position - transform.forward * dstFromTarget;
+            dstFromTarget = 2;
+            transform.position = target.position - transform.forward * dstFromTarget;
         }
         else
         {

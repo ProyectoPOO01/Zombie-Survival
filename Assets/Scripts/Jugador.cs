@@ -81,7 +81,7 @@ public class Jugador : MonoBehaviour {
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         Vector2 inputDir = input.normalized;
 
-        if ((inputDir != Vector2.zero) || aiming)
+        if (inputDir != Vector2.zero)
         {
             float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
             transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
@@ -94,7 +94,6 @@ public class Jugador : MonoBehaviour {
         isWalking = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A));
         shooting = Input.GetKey(KeyCode.Mouse0);
         aiming = Input.GetKey(KeyCode.Mouse1);
-
     }
 
     void CambiarPose()

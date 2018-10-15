@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.496413, b: 0.5748175, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -116,9 +116,9 @@ NavMeshSettings:
 --- !u!1 &151279508
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 151279512}
   - component: {fileID: 151279511}
@@ -135,27 +135,31 @@ GameObject:
 --- !u!81 &151279509
 AudioListener:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 151279508}
   m_Enabled: 1
 --- !u!124 &151279510
 Behaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 151279508}
   m_Enabled: 1
 --- !u!20 &151279511
 Camera:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 151279508}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -185,7 +189,7 @@ Camera:
 --- !u!4 &151279512
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 151279508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -198,7 +202,7 @@ Transform:
 --- !u!114 &151279513
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 151279508}
   m_Enabled: 1
@@ -255,24 +259,24 @@ Prefab:
       value: 
       objectReference: {fileID: 1494708294}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 6c5e597e82120744cb3220e270445a83, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: 6c5e597e82120744cb3220e270445a83, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!4 &910008398 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4138307343190586, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
+  m_CorrespondingSourceObject: {fileID: 4138307343190586, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
     type: 2}
   m_PrefabInternal: {fileID: 1959429125}
 --- !u!4 &1007442415 stripped
 Transform:
-  m_PrefabParentObject: {fileID: 4514729624194632, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
+  m_CorrespondingSourceObject: {fileID: 4514729624194632, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
     type: 2}
   m_PrefabInternal: {fileID: 1959429125}
 --- !u!1 &1182869129
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 1182869133}
   - component: {fileID: 1182869132}
@@ -288,7 +292,7 @@ GameObject:
 --- !u!23 &1182869130
 MeshRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1182869129}
   m_Enabled: 1
@@ -323,7 +327,7 @@ MeshRenderer:
 --- !u!64 &1182869131
 MeshCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1182869129}
   m_Material: {fileID: 0}
@@ -337,14 +341,14 @@ MeshCollider:
 --- !u!33 &1182869132
 MeshFilter:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1182869129}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1182869133
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1182869129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -357,9 +361,9 @@ Transform:
 --- !u!1 &1487246060
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 1487246062}
   - component: {fileID: 1487246061}
@@ -373,7 +377,7 @@ GameObject:
 --- !u!108 &1487246061
 Light:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1487246060}
   m_Enabled: 1
@@ -400,6 +404,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
@@ -409,7 +414,7 @@ Light:
 --- !u!4 &1487246062
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1487246060}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
@@ -421,7 +426,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1494708294 stripped
 GameObject:
-  m_PrefabParentObject: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
+  m_CorrespondingSourceObject: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
     type: 2}
   m_PrefabInternal: {fileID: 1959429125}
 --- !u!1001 &1959429125
@@ -468,6 +473,16 @@ Prefab:
       propertyPath: camara
       value: 
       objectReference: {fileID: 151279508}
+    - target: {fileID: 114616963272028334, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
+        type: 2}
+      propertyPath: gravity
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114616963272028334, guid: 5a5db3d9a6b634148b2abeda73d17e2b,
+        type: 2}
+      propertyPath: shootDelay
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
-  m_IsPrefabParent: 0
+  m_SourcePrefab: {fileID: 100100000, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
+  m_IsPrefabAsset: 0
