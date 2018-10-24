@@ -5,63 +5,48 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour 
 {
-    NavMeshAgent agent;
-    Transform target;
-    Jugador jugador;
+    PlayerHealth playerHealth;
     Animator anim;
 
-    public NavMeshAgent Agent
-    {
-        get { return agent; }
-    }
-    public Transform Target
-    {
-        get { return target; }
-    }
-    public Jugador Jugad
-    {
-        get { return jugador; }
-    }
-    public Animator Anim
-    {
-        get { return anim; }
-    }
+    EnemyAttack enemyAttack;
 
-    public GameObject player;
+    public GameObject playerGO;
+
     bool playerInRange;
+    public bool PlayerInRange
+    {
+        get { return playerInRange; }
+    }
 
 	void Start ()
     {
+        enemyAttack = GetComponent<EnemyAttack>();
+        playerHealth = playerGO.GetComponent<PlayerHealth>();
         anim = GetComponent<Animator>();
-        target = player.transform;
-        jugador = player.GetComponent<Jugador>();
-        agent = GetComponent<NavMeshAgent>();
 	}
 	
-	// Update is called once per frame
 	void Update () 
     {
-        Perseguir();
+        ChangePose();
 	}
 
-    void Perseguir()
+    void ChangePose()
     {
-        if(jugador.CurrentHealth > 0 && !playerInRange)
+        if (playerHealth.CurrentHealth > 0 && !playerInRange )
         {
             anim.SetBool("PlayerAlive", true);
             anim.SetBool("Walk", true);
             anim.SetBool("PlayerInRange", false);
-            agent.isStopped = false;
-            agent.SetDestination(target.position);
         }
-        if(jugador.CurrentHealth > 0 && playerInRange)
+        if (playerHealth.CurrentHealth > 0 && playerInRange && !enemyAttack.IsAttacking)
         {
+            enemyAttack.IsAttacking = true;
             anim.SetBool("PlayerAlive", true);
             anim.SetBool("PlayerInRange", true);
             anim.SetBool("Walk", false);
-            agent.isStopped = true;
+            StartCoroutine(enemyAttack.AttackDelay());
         }
-        if(jugador.CurrentHealth == 0)
+        if ((playerHealth.CurrentHealth == 0))
         {
             anim.SetBool("PlayerAlive", false);
             anim.SetBool("Walk", false);
@@ -74,6 +59,7 @@ public class EnemyScript : MonoBehaviour
         if(other.gameObject.tag == "Player")
         {
             playerInRange = true;
+            Debug.Log("En rango");
         }
     }
     void OnTriggerExit(Collider other)
@@ -81,6 +67,7 @@ public class EnemyScript : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerInRange = false;
+            Debug.Log("Fuera de rango");
         }
     }
 }

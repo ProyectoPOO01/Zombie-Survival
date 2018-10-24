@@ -2,46 +2,67 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponShoot : MonoBehaviour {
+public class WeaponShoot : MonoBehaviour
+{
 
+    public GameObject playerGO;
     public GameObject bullet;
-    public GameObject player;
 
-    public float gravity;
+    public float timeDestroy;
+
     public float shootDelay;
     public float shootForce;
 
-    bool canShoot = true;
+    bool canShoot;
 
     AudioSource shootAudio;
-    Jugador jugador;
+    PlayerMovement playMov;
+    Player player;
     Rigidbody rb;
 
     void Start ()
     {
-        jugador = player.GetComponent<Jugador>();
-        rb = bullet.GetComponent<Rigidbody>();
+        canShoot = true;
+
+        playMov = playerGO.GetComponent<PlayerMovement>();
         shootAudio = GetComponent<AudioSource>();
+        player = playerGO.GetComponent<Player>();
+        rb = bullet.GetComponent<Rigidbody>();
     }
 	
 	void Update ()
     {
-
-        Disparar();
+        Shoot();
 	}
-
-    void Disparar()
+    GameObject bullReference;
+    public GameObject BullReference
     {
-        if (jugador.IsWalking && !jugador.Reloading && jugador.Shooting && canShoot)
+        get { return bullReference; }
+        set { bullReference = value; }
+    }
+    void Shoot()
+    {
+        float timer = 0;
+        if (playMov.IsWalking && !player.Reloading && player.Shooting && canShoot)
         {
-            GameObject bullReference = Instantiate(bullet, transform.position, jugador.transform.rotation) as GameObject;
+            bullReference = Instantiate(bullet, transform.position, player.transform.rotation) as GameObject;
             shootAudio.Play();
+
             Rigidbody bullRBref = bullReference.GetComponent<Rigidbody>();
             bullRBref.AddForce(-transform.right * shootForce);
-            //bullRBref.AddForce(Vector3.down * gravity);
+
             canShoot = false;
+
+            timer = 0;
+            timer += Time.deltaTime;
+            if (timer >= timeDestroy)
+            {
+                Destroy(bullReference);
+            }
             StartCoroutine(ShootDelay());
         }
+
+        Debug.Log(timer);
     }
 
     IEnumerator ShootDelay()

@@ -2,42 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlCamara : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
 
     bool lockCursor;
 
-    float mouseSensitivity;
-    float dstFromTarget;
     float rotationSmoothTime;
-    float yaw;
+    float mouseSensitivity;
+    float dstFromTarget = 2;
     float pitch;
+    float yaw;
 
-    Jugador jugador;
-    public GameObject player;
+    public GameObject playerGO;
+    Player player;
 
-    public Transform target;
-    public Transform target02;
     public Vector2 pitchMinMax = new Vector2(-40, 85);
     Vector3 rotationSmoothVelocity;
+    public Transform target;
     Vector3 currentRotation;
 
 
-    void Start ()
+    void Start()
     {
-        jugador = player.GetComponent<Jugador>();
+        player = playerGO.GetComponent<Player>();
 
         lockCursor = true;
+
         mouseSensitivity = 10;
         dstFromTarget = 2;
         rotationSmoothTime = 0.12f;
 
         BloquearMouse();
-	}
-	
-	void LateUpdate ()
+    }
+
+    void LateUpdate()
     {
-        CamaraNormal();
-	}
+        RotateCamera();
+    }
 
     void BloquearMouse()
     {
@@ -48,7 +49,7 @@ public class ControlCamara : MonoBehaviour {
         }
     }
 
-    void CamaraNormal()
+    void RotateCamera()
     {
         yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -57,16 +58,7 @@ public class ControlCamara : MonoBehaviour {
         currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
 
         transform.eulerAngles = currentRotation;
-
-        if (jugador.Aiming)
-        {
-            dstFromTarget = 2;
-            transform.position = target.position - transform.forward * dstFromTarget;
-        }
-        else
-        {
-            dstFromTarget = 2;
-            transform.position = target.position - transform.forward * dstFromTarget;
-        }
+        
+        transform.position = target.position - transform.forward * dstFromTarget;
     }
 }

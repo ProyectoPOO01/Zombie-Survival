@@ -2,35 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Jugador : MonoBehaviour {
-
-    float walkSpeed;
-    float runSpeed;
-    float turnSmoothTime;
-    float speedSmoothTime;
-    float currentSpeed;
-    float speedSmoothVelocity;
-    float turnSmoothVelocity;
-
-    public int startingHealth;
-    int currentHealth;
+public class Player : MonoBehaviour
+{
 
     bool reloading;
-    bool isWalking;
-    bool running;
     bool shooting;
     bool aiming;
 
+    PlayerMovement playMov;
+
     Animator animator;
-    Transform cameraT;
 
-    Camera cam;
-    public GameObject camara;
-
-    public bool IsWalking
-    {
-        get { return isWalking; }
-    }
     public bool Reloading
     {
         get { return reloading; }
@@ -38,76 +20,43 @@ public class Jugador : MonoBehaviour {
     public bool Shooting
     {
         get { return shooting; }
+        set { shooting = value; }
     }
     public bool Aiming
     {
         get { return aiming; }
-    }
-
-    public int CurrentHealth
-    {
-        get { return currentHealth; }
+        set { aiming = value; }
     }
 
     void Start()
     {
-        cam = camara.GetComponent<Camera>(); 
+        playMov = GetComponent<PlayerMovement>();
 
-        startingHealth = 100;
-        currentHealth = startingHealth;
-
-        walkSpeed = 2;
-        runSpeed = 6;
-        turnSmoothTime = 0.2f;
-        turnSmoothVelocity = 0;
-        speedSmoothTime = 0.1f;
-        speedSmoothVelocity = 0;
-        currentSpeed = 0;
 
         animator = GetComponent<Animator>();
-        cameraT = Camera.main.transform;
     }
-	
-	void Update ()
+
+    void Update()
     {
-        currentHealth = startingHealth;
-        Desplazar();
-        CambiarPose();
-	}
+        ChangePose();
+    }
 
-
-    void Desplazar()
+    void ChangePose()
     {
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        Vector2 inputDir = input.normalized;
-
-        if (inputDir != Vector2.zero)
-        {
-            float targetRotation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg + cameraT.eulerAngles.y;
-            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothTime);
-        }
-
-        running = Input.GetKey(KeyCode.LeftShift);
-        float targetSpeed = ((running) ? runSpeed : walkSpeed) * inputDir.magnitude;
-        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref speedSmoothVelocity, speedSmoothTime);
-
-        isWalking = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A));
+        playMov.IsWalking = (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A));
         shooting = Input.GetKey(KeyCode.Mouse0);
         aiming = Input.GetKey(KeyCode.Mouse1);
-    }
 
-    void CambiarPose()
-    {
-        if (isWalking && !reloading)
+        if (playMov.IsWalking && !reloading)
         {
             animator.SetBool("CaminaSin", true);
             animator.SetBool("Idle", false);
             animator.SetBool("CaminaCon", false);
             animator.SetBool("CorriendoSin", false);
             animator.SetBool("CorreApuntando", false);
-            transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
+            transform.Translate(transform.forward * playMov.CurrentSpeed * Time.deltaTime, Space.World);
         }
-        if (isWalking && (shooting || aiming))
+        if (playMov.IsWalking && (shooting || aiming))
         {
             animator.SetBool("CaminaSin", false);
             animator.SetBool("Idle", false);
@@ -115,7 +64,7 @@ public class Jugador : MonoBehaviour {
             animator.SetBool("CorriendoSin", false);
             animator.SetBool("CorreApuntando", false);
         }
-        if (!isWalking)
+        if (!playMov.IsWalking)
         {
             animator.SetBool("CaminaSin", false);
             animator.SetBool("Idle", true);
@@ -131,7 +80,7 @@ public class Jugador : MonoBehaviour {
             animator.SetBool("CorriendoSin", false);
             animator.SetBool("CorreApuntando", false);
         }
-        if (isWalking && running)
+        if (playMov.IsWalking && playMov.IsRunning)
         {
             animator.SetBool("CaminaSin", false);
             animator.SetBool("Idle", false);
@@ -139,7 +88,7 @@ public class Jugador : MonoBehaviour {
             animator.SetBool("CorriendoSin", true);
             animator.SetBool("CorreApuntando", false);
         }
-        if (isWalking && running && (shooting || aiming))
+        if (playMov.IsWalking && playMov.IsRunning && (shooting || aiming))
         {
             animator.SetBool("CaminaSin", false);
             animator.SetBool("Idle", false);
@@ -147,13 +96,13 @@ public class Jugador : MonoBehaviour {
             animator.SetBool("CorriendoSin", false);
             animator.SetBool("CorreApuntando", true);
         }
-        if (!isWalking && Input.GetKey(KeyCode.R))
+        if (!playMov.IsWalking && Input.GetKey(KeyCode.R))
         {
-            StartCoroutine(Recargando());
+            StartCoroutine(ReloadingIE());
         }
     }
 
-    IEnumerator Recargando()
+    IEnumerator ReloadingIE()
     {
         reloading = true;
         animator.SetBool("IsReloading", true);

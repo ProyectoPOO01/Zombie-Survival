@@ -6,19 +6,37 @@ public class DestroyBullet : MonoBehaviour
 {
     public float timeToDestroy;
     float timer;
-	
-	// Update is called once per frame
-	void Update () 
+
+    WeaponShoot weaponShoot;
+    public GameObject player;
+
+    EnemyHealth enemyHealth;
+    public GameObject enemy;
+
+    void Start()
+    {
+        enemyHealth = enemy.GetComponent<EnemyHealth>();
+    }
+
+    void Update () 
     {
         timer += Time.deltaTime;
-        Destruir();
+        //Destruir();
 	}
 
-    void Destruir()
+    /*void Destruir()
     {
         if(timer >= timeToDestroy)
         {
-            Destroy(this.gameObject);
+            Destroy(weaponShoot.BullReference);
+        }
+    }*/
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Enemy")
+        {
+            enemyHealth.CurrentHealth -= 5;
         }
     }
 }
