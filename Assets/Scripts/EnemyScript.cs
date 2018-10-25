@@ -9,6 +9,7 @@ public class EnemyScript : MonoBehaviour
     Animator anim;
 
     EnemyAttack enemyAttack;
+    EnemyHealth enemyHealth;
 
     public GameObject playerGO;
 
@@ -20,6 +21,7 @@ public class EnemyScript : MonoBehaviour
 
 	void Start ()
     {
+        enemyHealth = GetComponent<EnemyHealth>();
         enemyAttack = GetComponent<EnemyAttack>();
         playerHealth = playerGO.GetComponent<PlayerHealth>();
         anim = GetComponent<Animator>();
@@ -32,13 +34,13 @@ public class EnemyScript : MonoBehaviour
 
     void ChangePose()
     {
-        if (playerHealth.CurrentHealth > 0 && !playerInRange )
+        if (playerHealth.CurrentHealth > 0 && !playerInRange && !enemyHealth.IsDead)
         {
             anim.SetBool("PlayerAlive", true);
             anim.SetBool("Walk", true);
             anim.SetBool("PlayerInRange", false);
         }
-        if (playerHealth.CurrentHealth > 0 && playerInRange && !enemyAttack.IsAttacking)
+        if (playerHealth.CurrentHealth > 0 && playerInRange && !enemyAttack.IsAttacking && !enemyHealth.IsDead)
         {
             enemyAttack.IsAttacking = true;
             anim.SetBool("PlayerAlive", true);
@@ -46,8 +48,15 @@ public class EnemyScript : MonoBehaviour
             anim.SetBool("Walk", false);
             StartCoroutine(enemyAttack.AttackDelay());
         }
-        if ((playerHealth.CurrentHealth == 0))
+        if ((playerHealth.CurrentHealth == 0) && !enemyHealth.IsDead)
         {
+            anim.SetBool("PlayerAlive", false);
+            anim.SetBool("Walk", false);
+            anim.SetBool("PlayerInRange", false);
+        }
+        if (enemyHealth.IsDead)
+        {
+            anim.SetBool("IsDead", true);
             anim.SetBool("PlayerAlive", false);
             anim.SetBool("Walk", false);
             anim.SetBool("PlayerInRange", false);

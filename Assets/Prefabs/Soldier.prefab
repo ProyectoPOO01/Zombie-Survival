@@ -2599,7 +2599,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerGO: {fileID: 1997168728174290}
-  bullet: {fileID: 1813265677082782, guid: 5490859af8198a0458aed710ea68b255, type: 2}
+  bullet: {fileID: 1828062243679920, guid: 38fede4154d24c341a63238988c68297, type: 2}
+  timeDestroy: 2
   shootDelay: 0.15
   shootForce: 400
 --- !u!114 &114976041275019896

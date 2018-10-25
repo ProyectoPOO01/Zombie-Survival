@@ -7,6 +7,11 @@ public class EnemyHealth : MonoBehaviour
     public int startingHealth;
     int currentHealth;
 
+    bool isDead;
+    public bool IsDead
+    {
+        get { return isDead; }
+    }
     public int CurrentHealth
     {
         get { return currentHealth; }
@@ -15,12 +20,21 @@ public class EnemyHealth : MonoBehaviour
 
     void Start ()
     {
+        isDead = false;
         startingHealth = 100;
-        currentHealth = startingHealth;
+        currentHealth = 100;
 	}
 	
 	void Update ()
     {
         Debug.Log(currentHealth);
+        if (currentHealth <= 0)
+        {
+            isDead = true;
+        }
+        else
+        {
+            isDead = false;
+        }
 	}
 }

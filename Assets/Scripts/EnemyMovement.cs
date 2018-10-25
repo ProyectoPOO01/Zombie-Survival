@@ -10,6 +10,7 @@ public class EnemyMovement : MonoBehaviour
     PlayerHealth playerHealth;
     EnemyScript enemyScript;
     EnemyAttack enemyAttack;
+    EnemyHealth enemyHealth;
 
     public GameObject playerGO;
 
@@ -19,6 +20,7 @@ public class EnemyMovement : MonoBehaviour
         playerHealth = playerGO.GetComponent<PlayerHealth>();
         enemyScript = GetComponent<EnemyScript>();
         enemyAttack = GetComponent<EnemyAttack>();
+        enemyHealth = GetComponent<EnemyHealth>();
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -32,12 +34,12 @@ public class EnemyMovement : MonoBehaviour
 
     void Follow()
     {
-        if (playerHealth.CurrentHealth > 0 && !enemyScript.PlayerInRange && !enemyAttack.IsAttacking)
+        if (playerHealth.CurrentHealth > 0 && !enemyScript.PlayerInRange && !enemyAttack.IsAttacking && !enemyHealth.IsDead)
         {
             agent.SetDestination(target.position);
             agent.isStopped = false;
         }
-        if (playerHealth.CurrentHealth > 0 && enemyScript.PlayerInRange && enemyAttack.IsAttacking)
+        if ((playerHealth.CurrentHealth > 0 && enemyScript.PlayerInRange && enemyAttack.IsAttacking) || enemyHealth.IsDead)
         {
             agent.isStopped = true;
         }
