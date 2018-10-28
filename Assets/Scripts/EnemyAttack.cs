@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+
+    PlayerHealth playerHealth;
+
+    [Header("GameObjects")]
+    [Space(10)]
+    public GameObject playerGO;
     public GameObject fist;
     public GameObject playerBody;
 
+    [Header("Attack Properties")]
+    [Space(10)]
     public float vectorMagnitude;
-
     public float attackTime;
     public int damage;
 
     bool isAttacking;
-
-    PlayerHealth playerHealth;
-    public GameObject playerGO;
 
     public bool IsAttacking
     {

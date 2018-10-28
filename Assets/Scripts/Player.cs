@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     bool shooting;
     bool aiming;
 
+    WeaponShoot weaponShoot;
+    public GameObject shooter;
+
     PlayerMovement playMov;
 
     Animator animator;
@@ -31,7 +34,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         playMov = GetComponent<PlayerMovement>();
-
+        weaponShoot = shooter.GetComponent<WeaponShoot>();
 
         animator = GetComponent<Animator>();
     }
@@ -96,7 +99,7 @@ public class Player : MonoBehaviour
             animator.SetBool("CorriendoSin", false);
             animator.SetBool("CorreApuntando", true);
         }
-        if (!playMov.IsWalking && Input.GetKey(KeyCode.R))
+        if (!playMov.IsWalking && Input.GetKey(KeyCode.R) && weaponShoot.ValidateAmmoCartridge(weaponShoot.AmmoCartridge) && !reloading)
         {
             StartCoroutine(ReloadingIE());
         }
@@ -105,9 +108,12 @@ public class Player : MonoBehaviour
     IEnumerator ReloadingIE()
     {
         reloading = true;
+        weaponShoot.Ammo = weaponShoot.MaxAmmo;
+        weaponShoot.AmmoCartridge -= 1;
         animator.SetBool("IsReloading", true);
         yield return new WaitForSeconds(2.5f);
         animator.SetBool("IsReloading", false);
         reloading = false;
     }
+
 }
