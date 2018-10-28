@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth;
-    int currentHealth;
+    [SerializeField]private int currentHealth;
 
     public GameObject canvas;
     public Slider healthSlider;

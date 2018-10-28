@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 33988818157903196}
   - component: {fileID: 23821027534183816}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Fist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1224,7 +1224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1352666830525362}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.0452, z: 2.48}
+  m_LocalPosition: {x: 0, y: -32.4, z: 2.48}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4044713780556728}
@@ -2343,6 +2343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
+  currentHealth: 0
+  canvas: {fileID: 1053661542812690}
   healthSlider: {fileID: 114843624946283588}
 --- !u!114 &114131360712705042
 MonoBehaviour:
@@ -2371,7 +2373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a1f435a60b6fc4ba666c26fbda7245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGO: {fileID: 0}
+  playerGO: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
 --- !u!114 &114227693045310574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2404,12 +2406,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee93b0af6c9adc4eb38d710e13e5fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerGO: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
   fist: {fileID: 1111709009575550}
-  playerBody: {fileID: 0}
+  playerBody: {fileID: 1365221329168450, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
   vectorMagnitude: 0.18
   attackTime: 0.3
   damage: 5
-  playerGO: {fileID: 0}
 --- !u!114 &114602670904230924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2421,7 +2423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f8014db96c86f4fa7a0f19335bd910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGO: {fileID: 0}
+  playerGO: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
 --- !u!114 &114729197430412210
 MonoBehaviour:
   m_ObjectHideFlags: 1

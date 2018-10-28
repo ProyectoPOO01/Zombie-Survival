@@ -18,4 +18,9 @@ public class PlayerHealth : MonoBehaviour
         startingHealth = 100;
         currentHealth = startingHealth;
     }
+
+    private void Update()
+    {
+        Debug.Log(currentHealth);
+    }
 }

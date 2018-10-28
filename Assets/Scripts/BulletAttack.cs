@@ -5,19 +5,14 @@ using UnityEngine;
 public class BulletAttack : MonoBehaviour
 {
     EnemyHealth enemyHealth;
-    public GameObject enemy;
 
     public int bulletDamage;
-
-	void Start ()
-    {
-        enemyHealth = enemy.GetComponent<EnemyHealth>();
-	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Enemy")
         {
+            enemyHealth = other.GetComponent<EnemyHealth>();
             enemyHealth.CurrentHealth -= bulletDamage;
         }
     }
