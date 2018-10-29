@@ -6,12 +6,11 @@ public class EnemyAttack : MonoBehaviour
 {
 
     PlayerHealth playerHealth;
+    EnemyScript enemyScript;
 
     [Header("GameObjects")]
     [Space(10)]
-    public GameObject playerGO;
-    public GameObject fist;
-    public GameObject playerBody;
+    GameObject playerGO;
 
     [Header("Attack Properties")]
     [Space(10)]
@@ -26,27 +25,21 @@ public class EnemyAttack : MonoBehaviour
         get { return isAttacking; }
         set { isAttacking = value; }
     }
+
 	void Start ()
     {
+        enemyScript = GetComponent<EnemyScript>();
+        playerGO = GameObject.FindGameObjectWithTag("Player");
         playerHealth = playerGO.GetComponent<PlayerHealth>();
         isAttacking = false;
 	}
 	
-	void Update ()
+
+    public void Attack()
     {
         if (!isAttacking)
         {
-            Attack();
-        }
-	}
-
-    void Attack()
-    {
-        Vector2 distAttack = new Vector2(playerBody.transform.position.x - fist.transform.position.x, playerBody.transform.position.y - fist.transform.position.y);
-        if (distAttack.magnitude <= vectorMagnitude)
-        {
             playerHealth.CurrentHealth -= damage;
-            Debug.Log("Atacando");
         }
     }
 

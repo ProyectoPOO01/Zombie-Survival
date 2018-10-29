@@ -12,27 +12,28 @@ public class EnemyMovement : MonoBehaviour
     EnemyAttack enemyAttack;
     EnemyHealth enemyHealth;
 
-    public GameObject playerGO;
+    Animator anim;
+
+    GameObject playerGO;
 
     NavMeshAgent agent;
     void Start ()
     {
+        playerGO = GameObject.FindGameObjectWithTag("Player");
+
         playerHealth = playerGO.GetComponent<PlayerHealth>();
         enemyScript = GetComponent<EnemyScript>();
         enemyAttack = GetComponent<EnemyAttack>();
         enemyHealth = GetComponent<EnemyHealth>();
 
+        anim = GetComponent<Animator>();
+
         agent = GetComponent<NavMeshAgent>();
 
         target = playerGO.transform;
     }
-	
-	void Update ()
-    {
-        Follow();
-    }
 
-    void Follow()
+    public void Follow()
     {
         if (playerHealth.CurrentHealth > 0 && !enemyScript.PlayerInRange && !enemyAttack.IsAttacking && !enemyHealth.IsDead)
         {
@@ -42,6 +43,37 @@ public class EnemyMovement : MonoBehaviour
         if ((playerHealth.CurrentHealth > 0 && enemyScript.PlayerInRange && enemyAttack.IsAttacking) || enemyHealth.IsDead)
         {
             agent.isStopped = true;
+        }
+    }
+
+    public void ChangePose()
+    {
+        if (playerHealth.CurrentHealth > 0 && !enemyScript.PlayerInRange && !enemyHealth.IsDead)
+        {
+            anim.SetBool("PlayerAlive", true);
+            anim.SetBool("Walk", true);
+            anim.SetBool("PlayerInRange", false);
+        }
+        if (playerHealth.CurrentHealth > 0 && enemyScript.PlayerInRange && !enemyAttack.IsAttacking && !enemyHealth.IsDead)
+        {
+            enemyAttack.IsAttacking = true;
+            anim.SetBool("PlayerAlive", true);
+            anim.SetBool("PlayerInRange", true);
+            anim.SetBool("Walk", false);
+            StartCoroutine(enemyAttack.AttackDelay());
+        }
+        if ((playerHealth.CurrentHealth == 0) && !enemyHealth.IsDead)
+        {
+            anim.SetBool("PlayerAlive", false);
+            anim.SetBool("Walk", false);
+            anim.SetBool("PlayerInRange", false);
+        }
+        if (enemyHealth.IsDead)
+        {
+            anim.SetBool("IsDead", true);
+            anim.SetBool("PlayerAlive", false);
+            anim.SetBool("Walk", false);
+            anim.SetBool("PlayerInRange", false);
         }
     }
 }

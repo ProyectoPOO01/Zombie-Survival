@@ -2306,8 +2306,8 @@ Rigidbody:
   m_GameObject: {fileID: 1352666830525362}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -2373,7 +2373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a1f435a60b6fc4ba666c26fbda7245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGO: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
 --- !u!114 &114227693045310574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2406,12 +2405,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee93b0af6c9adc4eb38d710e13e5fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGO: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
-  fist: {fileID: 1111709009575550}
-  playerBody: {fileID: 1365221329168450, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
   vectorMagnitude: 0.18
-  attackTime: 0.3
-  damage: 5
+  attackTime: 1.2
+  damage: 2
 --- !u!114 &114602670904230924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2423,7 +2419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f8014db96c86f4fa7a0f19335bd910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerGO: {fileID: 1997168728174290, guid: 5a5db3d9a6b634148b2abeda73d17e2b, type: 2}
 --- !u!114 &114729197430412210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2741,7 +2736,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.85
+  m_Height: 1
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class EnemyScript : MonoBehaviour 
 {
     PlayerHealth playerHealth;
-    Animator anim;
 
     EnemyAttack enemyAttack;
     EnemyHealth enemyHealth;
+    EnemyMovement enemyMovement;
 
-    public GameObject playerGO;
+    GameObject playerGO;
 
     bool playerInRange;
     public bool PlayerInRange
@@ -21,62 +21,62 @@ public class EnemyScript : MonoBehaviour
 
 	void Start ()
     {
+        playerGO = GameObject.FindGameObjectWithTag("Player");
         enemyHealth = GetComponent<EnemyHealth>();
         enemyAttack = GetComponent<EnemyAttack>();
+        enemyMovement = GetComponent<EnemyMovement>();
         playerHealth = playerGO.GetComponent<PlayerHealth>();
-        anim = GetComponent<Animator>();
 	}
 	
 	void Update () 
     {
-        ChangePose();
+        Move();
+        ChangeHealth();
 	}
 
-    void ChangePose()
+    private void Move()
     {
-        if (playerHealth.CurrentHealth > 0 && !playerInRange && !enemyHealth.IsDead)
-        {
-            anim.SetBool("PlayerAlive", true);
-            anim.SetBool("Walk", true);
-            anim.SetBool("PlayerInRange", false);
-        }
-        if (playerHealth.CurrentHealth > 0 && playerInRange && !enemyAttack.IsAttacking && !enemyHealth.IsDead)
-        {
-            enemyAttack.IsAttacking = true;
-            anim.SetBool("PlayerAlive", true);
-            anim.SetBool("PlayerInRange", true);
-            anim.SetBool("Walk", false);
-            StartCoroutine(enemyAttack.AttackDelay());
-        }
-        if ((playerHealth.CurrentHealth == 0) && !enemyHealth.IsDead)
-        {
-            anim.SetBool("PlayerAlive", false);
-            anim.SetBool("Walk", false);
-            anim.SetBool("PlayerInRange", false);
-        }
-        if (enemyHealth.IsDead)
-        {
-            anim.SetBool("IsDead", true);
-            anim.SetBool("PlayerAlive", false);
-            anim.SetBool("Walk", false);
-            anim.SetBool("PlayerInRange", false);
-        }
+        enemyMovement.Follow();
+        enemyMovement.ChangePose();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void Attack()
+    {
+        enemyAttack.Attack();
+    }
+
+    private void ChangeHealth()
+    {
+        enemyHealth.ChangeHealth();
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
             playerInRange = true;
-            Debug.Log("En rango");
         }
     }
-    void OnTriggerExit(Collider other)
+
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && enemyHealth.CurrentHealth > 0)
+        {
+            playerInRange = true;
+
+            bool attack = true;
+            if (attack)
+            {
+                Attack();
+                attack = false;
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && enemyHealth.CurrentHealth > 0)
         {
             playerInRange = false;
-            Debug.Log("Fuera de rango");
         }
     }
 }

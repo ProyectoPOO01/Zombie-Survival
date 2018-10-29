@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawn : MonoBehaviour, ISpawner
+public class EnemySpawn : MonoBehaviour, ISpawner 
 {
 
     [Header("Rangos")]
@@ -31,14 +31,9 @@ public class Spawn : MonoBehaviour, ISpawner
 
     bool canSpawn = true;
 
-    void Start()
-    {
-        Vector3 position01 = new Vector3(Random.Range(x1, x4), y, Random.Range(z1, z2));
-    }
-
     void Update()
     {
-        if(canSpawn)
+        if (canSpawn)
         {
             canSpawn = false;
             SpawnObject();
@@ -47,7 +42,7 @@ public class Spawn : MonoBehaviour, ISpawner
 
     public void SpawnObject()
     {
-        
+
         int random = Random.Range(1, 5);
 
         switch (random)

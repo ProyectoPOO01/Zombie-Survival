@@ -19,8 +19,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth = startingHealth;
     }
 
-    private void Update()
+    void ChangeHealth()
     {
-        Debug.Log(currentHealth);
+        //Acá va el UI y se instancia en Player
     }
 }

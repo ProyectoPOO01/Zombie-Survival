@@ -75,9 +75,8 @@ public class WeaponShoot : MonoBehaviour
     {
         ammoText.text = ammo.ToString();
         cartridgeText.text = ammoCartridge.ToString();
-        Shoot();
 	}
-    void Shoot()
+    public void Shoot()
     {
         if (playMov.IsWalking && !player.Reloading && player.Shooting && canShoot && ValidateAmmo(ammo))
         {
