@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public Slider healthSlider;
 
     GameObject score;
-    ScoreManagement scoreManagement;
+    //ScoreManagement scoreManagement;
 
     bool isDead;
     public bool IsDead
@@ -28,7 +28,7 @@ public class EnemyHealth : MonoBehaviour
     void Start ()
     {
         score = GameObject.FindGameObjectWithTag("Score");
-        scoreManagement = score.GetComponent<ScoreManagement>();
+        //scoreManagement = score.GetComponent<ScoreManagement>();
 
         healthSlider.maxValue = startingHealth;
         isDead = false;
@@ -42,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
         {
             canvas.SetActive(false);
             isDead = true;
-            scoreManagement.CanIncreaseScore = true;
+            //scoreManagement.CanIncreaseScore = true;
         }
 	}
 
