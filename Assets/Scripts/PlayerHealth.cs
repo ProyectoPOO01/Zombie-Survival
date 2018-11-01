@@ -8,6 +8,10 @@ public class PlayerHealth : MonoBehaviour
 
     public Slider healthSlider;
 
+    PlayerMovement playerMovement;
+
+    private bool playerDead;
+
     public int startingHealth;
     int currentHealth;
     public int CurrentHealth
@@ -15,9 +19,17 @@ public class PlayerHealth : MonoBehaviour
         get { return currentHealth; }
         set { currentHealth = value; }
     }
+
+    public bool PlayerDead
+    {
+        get { return playerDead; }
+    }
+
     
     void Start ()
     {
+        playerMovement = GetComponent<PlayerMovement>();
+        playerDead = false;
         startingHealth = 100;
         currentHealth = startingHealth;
     }
@@ -25,6 +37,14 @@ public class PlayerHealth : MonoBehaviour
     public void ChangeHealth()
     {
         healthSlider.value = currentHealth;
-        //Acá va el UI y se instancia en Player
+        if (currentHealth <= 0)
+        {
+            playerDead = true;
+            playerMovement.enabled = false;
+        }
+        else
+        {
+            playerDead = false;
+        }
     }
 }

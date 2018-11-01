@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    bool canDie;
 
     float walkSpeed;
     float runSpeed;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     Player player;
     WeaponShoot weaponShoot;
+    PlayerHealth playerHealth;
 
     Animator animator;
 
@@ -41,6 +43,8 @@ public class PlayerMovement : MonoBehaviour
     
     void Start ()
     {
+        canDie = true;
+        playerHealth = GetComponent<PlayerHealth>();
         player = GetComponent<Player>();
 
         cam = camara.GetComponent<Camera>();
@@ -98,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("CorriendoSin", false);
             animator.SetBool("CorreApuntando", false);
         }
-        if (!isWalking)
+        if (!isWalking && !playerHealth.PlayerDead)
         {
             animator.SetBool("CaminaSin", false);
             animator.SetBool("Idle", true);
@@ -132,7 +136,33 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!isWalking && Input.GetKey(KeyCode.R) && weaponShoot.ValidateAmmoCartridge(weaponShoot.AmmoCartridge) && !player.Reloading)
         {
-            StartCoroutine(player.ReloadingIE());
+            player.Reloading = true;
+            weaponShoot.Ammo = weaponShoot.MaxAmmo;
+            weaponShoot.AmmoCartridge -= 1;
+            animator.SetBool("IsReloading", true);
         }
+        if (playerHealth.PlayerDead && canDie)
+        {
+            animator.SetBool("PlayerDead", true);
+            animator.SetBool("CanDie", true);
+
+            animator.SetBool("CaminaSin", false);
+            animator.SetBool("Idle", false);
+            animator.SetBool("CaminaCon", false);
+            animator.SetBool("CorriendoSin", false);
+            animator.SetBool("CorreApuntando", false);
+            canDie = false;
+        }
+    }
+
+    void UnableAnimator()
+    {
+        animator.SetBool("CanDie", false);
+    }
+
+    void CanReload()
+    {
+        animator.SetBool("IsReloading", false);
+        player.Reloading = false;
     }
 }

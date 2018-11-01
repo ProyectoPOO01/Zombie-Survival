@@ -49,6 +49,10 @@ public class EnemyMovement : MonoBehaviour
         {
             agent.isStopped = true;
         }
+        if (playerHealth.PlayerDead)
+        {
+            agent.isStopped = true;
+        }
     }
 
     /// <summary>
@@ -70,7 +74,7 @@ public class EnemyMovement : MonoBehaviour
             anim.SetBool("Walk", false);
             StartCoroutine(enemyAttack.AttackDelay());
         }
-        if ((playerHealth.CurrentHealth == 0) && !enemyHealth.IsDead)
+        if ((playerHealth.CurrentHealth <= 0) && !enemyHealth.IsDead)
         {
             anim.SetBool("PlayerAlive", false);
             anim.SetBool("Walk", false);

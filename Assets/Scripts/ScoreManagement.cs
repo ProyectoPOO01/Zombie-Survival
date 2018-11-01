@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManagement : MonoBehaviour 
 {
@@ -9,13 +10,14 @@ public class ScoreManagement : MonoBehaviour
 
     public int scoreToSpawn;
 
+    public Text scoreText;
+
     bool canIncreaseScore;
 
     EnemyHealth enemyHealth;
     public GameObject enemy;
 
     PickUpSpawner pickUpSpawner;
-    public GameObject pUSpawner;
 
     public bool CanIncreaseScore
     {
@@ -25,8 +27,8 @@ public class ScoreManagement : MonoBehaviour
 
 	void Start () 
     {
-        pickUpSpawner = pUSpawner.GetComponent<PickUpSpawner>();
-        enemyHealth = enemy.GetComponent<EnemyHealth>();;
+        pickUpSpawner = GetComponent<PickUpSpawner>();
+        enemyHealth = enemy.GetComponent<EnemyHealth>();
         canIncreaseScore = false;
         startingScore = 0;
         currentScore = startingScore;
@@ -34,10 +36,11 @@ public class ScoreManagement : MonoBehaviour
 
     private void Update()
     {
+        scoreText.text = currentScore.ToString();
         IncreaseScore();
     }
 
-    void IncreaseScore()
+    private void IncreaseScore()
     {
         if(canIncreaseScore)
         {
@@ -45,6 +48,7 @@ public class ScoreManagement : MonoBehaviour
             if (currentScore >= scoreToSpawn)
             {
                 pickUpSpawner.CanSpawn = true;
+                currentScore -= scoreToSpawn;
             }
             canIncreaseScore = false;
         }

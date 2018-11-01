@@ -72,6 +72,9 @@ GameObject:
   - component: {fileID: 4811598326262888}
   - component: {fileID: 65779175873335644}
   - component: {fileID: 114797626561036100}
+  - component: {fileID: 114256573244912266}
+  - component: {fileID: 135154777465841460}
+  - component: {fileID: 54329037548393798}
   m_Layer: 0
   m_Name: AmmoBox
   m_TagString: PickUp
@@ -257,6 +260,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1421544682665522}
   m_Mesh: {fileID: 4300004, guid: c0ef26e38090d41c5b81e7d86e3f4c01, type: 3}
+--- !u!54 &54329037548393798
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1965349497805216}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
 --- !u!65 &65779175873335644
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -269,6 +287,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 0.15, z: 0.25}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114256573244912266
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1965349497805216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c63721b2b9c95394aa685f9718d4ee94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
 --- !u!114 &114797626561036100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,5 +311,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpProperty: Ammo
-  shooter: {fileID: 0}
-  playerGO: {fileID: 0}
+--- !u!135 &135154777465841460
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1965349497805216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.23
+  m_Center: {x: 0, y: 0, z: 0}

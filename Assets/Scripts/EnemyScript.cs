@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyScript : MonoBehaviour 
+public class EnemyScript : MonoBehaviour, ICharacterController
 {
     PlayerHealth playerHealth;
 
@@ -12,8 +12,22 @@ public class EnemyScript : MonoBehaviour
     EnemyMovement enemyMovement;
 
     GameObject playerGO;
-    
-	void Start ()
+
+    [SerializeField] private float attackTime;
+    [SerializeField] private int damage;
+
+    public float AttackTime
+    {
+        get { return attackTime; }
+        set { attackTime = value; }
+    }
+    public int Damage
+    {
+        get { return damage; }
+        set { damage = value; }
+    }
+
+    void Start ()
     {
         enemyAttack = GetComponent<EnemyAttack>();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -29,18 +43,18 @@ public class EnemyScript : MonoBehaviour
         ChangeHealth();
 	}
 
-    private void Move()
+    public void Move()
     {
         enemyMovement.Follow();
         enemyMovement.ChangePose();
     }
 
-    private void Attack()
+    public void Attack()
     {
         enemyAttack.Attack();
     }
 
-    private void ChangeHealth()
+    public void ChangeHealth()
     {
         enemyHealth.ChangeHealth();
     }

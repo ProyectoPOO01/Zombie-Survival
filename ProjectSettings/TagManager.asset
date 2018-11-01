@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - PickUp
   - Score
+  - Fire
+  - Environment
   layers:
   - Default
   - TransparentFX

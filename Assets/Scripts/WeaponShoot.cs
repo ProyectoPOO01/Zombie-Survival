@@ -119,7 +119,6 @@ public class WeaponShoot : MonoBehaviour
     {
         if (currentAmmoCartridge > 0)
         {
-            Debug.Log(currentAmmoCartridge);
             return true;
         }
         else

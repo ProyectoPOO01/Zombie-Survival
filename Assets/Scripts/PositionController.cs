@@ -27,7 +27,7 @@ public class PositionController : MonoBehaviour
 	
 	void Update ()
     {
-        countText.text = ((int)timer).ToString();
+        countText.text = (10 -(int)timer).ToString();
 
         if (isInside)
         {

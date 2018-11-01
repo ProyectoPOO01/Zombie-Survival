@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour, ISpawner 
 {
+    PlayerHealth playerHealth;
+    GameObject player;
 
     [Header("Rangos")]
-
     public float y;
 
     [Space(10)]
@@ -31,9 +32,15 @@ public class EnemySpawn : MonoBehaviour, ISpawner
 
     bool canSpawn = true;
 
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
+    }
+
     void Update()
     {
-        if (canSpawn)
+        if (canSpawn && !playerHealth.PlayerDead)
         {
             canSpawn = false;
             SpawnObject();
@@ -42,10 +49,9 @@ public class EnemySpawn : MonoBehaviour, ISpawner
 
     public void SpawnObject()
     {
+        int randomPosition = Random.Range(1, 5);
 
-        int random = Random.Range(1, 5);
-
-        switch (random)
+        switch (randomPosition)
         {
             case 1:
                 Vector3 position01 = new Vector3(Random.Range(x1, x4), y, Random.Range(z1, z2));
@@ -64,6 +70,7 @@ public class EnemySpawn : MonoBehaviour, ISpawner
                 Instantiate(enemigos, position04, Quaternion.identity);
                 break;
         }
+
         StartCoroutine(WaitForRespawn());
     }
     IEnumerator WaitForRespawn()

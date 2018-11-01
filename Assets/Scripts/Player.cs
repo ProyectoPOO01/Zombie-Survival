@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ICharacterController
 {
 
     bool reloading;
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public bool Reloading
     {
         get { return reloading; }
+        set { reloading = value; }
     }
     public bool Shooting
     {
@@ -43,30 +44,28 @@ public class Player : MonoBehaviour
     void Update()
     {
         Move();
-        Shoot();
-        playerHealth.ChangeHealth();
+        Attack();
+        ChangeHealth();
     }
 
-    private void Move()
+    public void Move()
     {
-        playerMovement.Move();
+        if (!playerHealth.PlayerDead)
+        {
+            playerMovement.Move();
+        }
         playerMovement.ChangePose();
     }
 
-    private void Shoot()
+    public  void Attack()
     {
         weaponShoot.Shoot();
     }
 
-    public IEnumerator ReloadingIE()
+    public  void ChangeHealth()
     {
-        reloading = true;
-        weaponShoot.Ammo = weaponShoot.MaxAmmo;
-        weaponShoot.AmmoCartridge -= 1;
-        anim.SetBool("IsReloading", true);
-        yield return new WaitForSeconds(2.5f);
-        anim.SetBool("IsReloading", false);
-        reloading = false;
+        playerHealth.ChangeHealth();
     }
+
 
 }

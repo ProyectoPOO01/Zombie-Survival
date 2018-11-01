@@ -6,22 +6,10 @@ public class EnemyAttack : MonoBehaviour
 {
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
+    EnemyScript enemyScript;
 
     GameObject playerGO;
 
-    [SerializeField]private float attackTime;
-    [SerializeField]private int damage;
-
-    public float AttackTime
-    {
-        get { return attackTime; }
-        set { attackTime = value; }
-    }
-    public int Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
 
     private bool canAttack; //Animation Event
 
@@ -36,6 +24,8 @@ public class EnemyAttack : MonoBehaviour
 	void Start()
     {
         enemyHealth = GetComponent<EnemyHealth>();
+        enemyScript = GetComponent<EnemyScript>();
+
         playerGO = GameObject.FindGameObjectWithTag("Player");
         playerHealth = playerGO.GetComponent<PlayerHealth>();
         isAttacking = false;
@@ -48,7 +38,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (!isAttacking && canAttack)
         {
-            playerHealth.CurrentHealth -= damage;
+            playerHealth.CurrentHealth -= enemyScript.Damage;
             canAttack = false;
         }
     }
@@ -67,7 +57,7 @@ public class EnemyAttack : MonoBehaviour
     /// <returns></returns>
     public IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(attackTime);
+        yield return new WaitForSeconds(enemyScript.AttackTime);
         isAttacking = false;
     }
 
