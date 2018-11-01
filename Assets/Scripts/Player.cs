@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     WeaponShoot weaponShoot;
     PlayerMovement playerMovement;
+    PlayerHealth playerHealth;
 
     Animator anim;
 
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        playerHealth = GetComponent<PlayerHealth>();
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
         weaponShoot = shooter.GetComponent<WeaponShoot>();
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
     {
         Move();
         Shoot();
+        playerHealth.ChangeHealth();
     }
 
     private void Move()

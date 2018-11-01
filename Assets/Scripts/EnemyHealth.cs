@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int startingHealth;
-    [SerializeField]private int currentHealth;
+
+    [SerializeField]private int startingHealth;
+    private int currentHealth;
 
     public GameObject canvas;
     public Slider healthSlider;
+    
 
     GameObject score;
     //ScoreManagement scoreManagement;

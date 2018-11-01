@@ -2323,7 +2323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
-  currentHealth: 0
   canvas: {fileID: 1183023548671038}
   healthSlider: {fileID: 114956143406578610}
 --- !u!114 &114667730606506198
@@ -2353,9 +2352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee93b0af6c9adc4eb38d710e13e5fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vectorMagnitude: 0.3
   attackTime: 0.5
-  damage: 2
+  damage: 5
 --- !u!114 &114872437316619800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2368,7 +2366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.33793116, a: 1}
+  m_Color: {r: 0.64705884, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2636,7 +2634,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.28
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

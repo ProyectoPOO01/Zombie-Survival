@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PositionController : MonoBehaviour
 {
-
     PlayerHealth playerHealth;
     GameObject player;
 
-    public float decreaseValue;
-    public float decreaseTime;
+    public GameObject count;
+    Text countText;
 
     private bool isInside;
 
@@ -17,21 +17,27 @@ public class PositionController : MonoBehaviour
 
 	void Start ()
     {
+        countText = count.GetComponent<Text>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
+
         timer = 0;
         isInside = true;
 	}
 	
 	void Update ()
     {
+        countText.text = ((int)timer).ToString();
+
         if (isInside)
         {
             timer = 0;
+            count.SetActive(false);
             return;
         }
         else
         {
+            count.SetActive(true);
             timer += Time.deltaTime;
         }
 

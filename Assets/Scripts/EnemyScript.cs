@@ -12,19 +12,14 @@ public class EnemyScript : MonoBehaviour
     EnemyMovement enemyMovement;
 
     GameObject playerGO;
-
-    bool playerInRange;
-    public bool PlayerInRange
-    {
-        get { return playerInRange; }
-    }
-
+    
 	void Start ()
     {
-        playerGO = GameObject.FindGameObjectWithTag("Player");
-        enemyHealth = GetComponent<EnemyHealth>();
         enemyAttack = GetComponent<EnemyAttack>();
+        enemyHealth = GetComponent<EnemyHealth>();
         enemyMovement = GetComponent<EnemyMovement>();
+
+        playerGO = GameObject.FindGameObjectWithTag("Player");
         playerHealth = playerGO.GetComponent<PlayerHealth>();
 	}
 	
@@ -50,33 +45,4 @@ public class EnemyScript : MonoBehaviour
         enemyHealth.ChangeHealth();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-            playerInRange = true;
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Player" && enemyHealth.CurrentHealth > 0)
-        {
-            playerInRange = true;
-
-            bool attack = true;
-            if (attack)
-            {
-                Attack();
-                attack = false;
-            }
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Player" && enemyHealth.CurrentHealth > 0)
-        {
-            playerInRange = false;
-        }
-    }
 }
