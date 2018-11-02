@@ -19,6 +19,10 @@ public class ScoreManagement : MonoBehaviour
 
     PickUpSpawner pickUpSpawner;
 
+    public int CurrentScore
+    {
+        get { return currentScore; }
+    }
     public bool CanIncreaseScore
     {
         get { return canIncreaseScore; }

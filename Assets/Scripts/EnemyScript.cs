@@ -40,6 +40,7 @@ public class EnemyScript : MonoBehaviour, ICharacterController
 	void Update () 
     {
         Move();
+        Attack();
         ChangeHealth();
 	}
 

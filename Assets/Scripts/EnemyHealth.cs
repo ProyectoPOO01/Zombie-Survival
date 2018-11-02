@@ -45,6 +45,7 @@ public class EnemyHealth : MonoBehaviour
             canvas.SetActive(false);
             isDead = true;
             scoreManagement.CanIncreaseScore = true;
+            StartCoroutine(DestroyGameObject());
         }
 	}
 
@@ -58,5 +59,11 @@ public class EnemyHealth : MonoBehaviour
         {
             return false;
         }
+    }
+
+    IEnumerator DestroyGameObject()
+    {
+        yield return new WaitForSeconds(3f);
+        Destroy(this.gameObject);
     }
 }
