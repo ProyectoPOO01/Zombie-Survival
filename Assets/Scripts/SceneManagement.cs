@@ -8,19 +8,30 @@ public class SceneManagement : MonoBehaviour {
     public float sceneDelay;
 
     GameObject player;
+    GameObject Boss;
+
+    EnemySpawn enemySpawn;
+
     PlayerHealth playerHealth;
-    void Start() {
+    void Start()
+    {
+        enemySpawn = GetComponent<EnemySpawn>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
     }
 
+    bool Set;
     private void Update()
     {
+        if (enemySpawn.BossSpawned)
+        {
+            Boss = GameObject.Find("Boss");
+        }
         ChangeScene();
     }
     void ChangeScene()
     {
-        if (playerHealth.PlayerDead)
+        if (playerHealth.PlayerDead || Boss.GetComponent<EnemyHealth>().CurrentHealth <= 0)
         {
             StartCoroutine(ChangeSceneDelay());
         }

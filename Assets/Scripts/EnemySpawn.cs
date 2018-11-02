@@ -11,6 +11,11 @@ public class EnemySpawn : MonoBehaviour, ISpawner
     private bool bossSpawned;
     public int scoreSpawnBoss;
 
+    public bool BossSpawned
+    {
+        get { return bossSpawned; }
+    }
+
     [Header("Rangos")]
     public float y;
 
