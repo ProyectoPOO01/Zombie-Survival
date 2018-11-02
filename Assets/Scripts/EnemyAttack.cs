@@ -38,7 +38,6 @@ public class EnemyAttack : MonoBehaviour
     {
         if (!isAttacking && canAttack)
         {
-            Debug.Log("Atacando");
             playerHealth.CurrentHealth -= enemyScript.Damage;
             canAttack = false;
         }

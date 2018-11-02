@@ -26,14 +26,6 @@ public class PowerUp : MonoBehaviour
         playerHealth = playerGO.GetComponent<PlayerHealth>();
     }
 
-    private void Update()
-    {
-        if (weaponShoot == null)
-        {
-            Debug.Log("Error de asignacion");
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Environment")

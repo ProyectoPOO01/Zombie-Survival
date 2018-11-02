@@ -24,7 +24,6 @@ public class PlayerHealth : MonoBehaviour
     {
         get { return playerDead; }
     }
-
     
     void Start ()
     {
