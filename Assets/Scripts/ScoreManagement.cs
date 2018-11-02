@@ -48,7 +48,7 @@ public class ScoreManagement : MonoBehaviour
             if (currentScore >= scoreToSpawn)
             {
                 pickUpSpawner.CanSpawn = true;
-                currentScore -= scoreToSpawn;
+                currentScore -= (scoreToSpawn - 1);
             }
             canIncreaseScore = false;
         }

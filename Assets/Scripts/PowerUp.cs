@@ -18,10 +18,20 @@ public class PowerUp : MonoBehaviour
     {
         collider = GetComponent<SphereCollider>();
         collider.enabled = false;
+
         shooter = GameObject.FindGameObjectWithTag("Fire");
+        weaponShoot = shooter.GetComponent<WeaponShoot>();
+
         playerGO = GameObject.FindGameObjectWithTag("Player");
         playerHealth = playerGO.GetComponent<PlayerHealth>();
-        weaponShoot = shooter.GetComponent<WeaponShoot>();
+    }
+
+    private void Update()
+    {
+        if (weaponShoot == null)
+        {
+            Debug.Log("Error de asignacion");
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -59,7 +69,6 @@ public class PowerUp : MonoBehaviour
                 {
                     playerHealth.CurrentHealth = 100;
                 }
-                
                 Destroy(this.gameObject);
             }
             else
